@@ -13,3 +13,4 @@ clisp
 ```
 
 ![xkcd](http://www.mrbill.net/images/comics/xkcd/lisp_cycles.gif)
+(Courtesy of [xkcd](http://www.xkcd.com/))
