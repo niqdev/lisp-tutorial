@@ -37,7 +37,7 @@
 ;;; B(n, r) = B(n - 1, r - 1) + B(n - 1, r) otherwise
 ;;; Implement a doubly recursive function (binomial N R) that computes the binomial coefficient B(N, R).
 
-;; type (binomial 4 2)
+;; type: (binomial 4 2)
 (defun binomial (N R)
   (if (or (zerop R) (= R N)) 1
   (+ (binomial (- N 1) (- R 1)) (binomial (- N 1) R))
