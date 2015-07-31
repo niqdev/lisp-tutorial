@@ -1,5 +1,6 @@
-;;; (load "exercise-linear-recursion.lisp")
+;;; (load "tutorial-1.lisp")
 
+;;; ---------- exercise 1.1 ----------
 ;;; The N'th triangular number is defined to be 1 + 2 + 3 + ... + N.
 ;;; Alternatively, we could give a recursive definition of triangular number as follows:
 ;;; T(n) = 1 if n = 1
@@ -13,6 +14,7 @@
 (defun triangular (N) (if (= N 1) 1 (+ N (triangular (- N 1)))))
 (trace triangular)
 
+;;; ---------- exercise 1.2 ----------
 ;;; Write down a recursive definition of B^E (assuming that both B and E are non-negative integers).
 ;;; Then implement a linearly recursive function (power B E) that computes BE.
 ;;; if E == 0, B^E = 1
@@ -26,3 +28,18 @@
   (t (* B (power B (- E 1))))
 ))
 (trace power)
+
+;;; ---------- exercise 1.3 ----------
+;;; The Binomial Coefficient B(n, r) is the coefficient of the term x^r in the binormial expansion of (1 + x)^n.
+;;; For example B(4, 2) = 6 because (1 + x)^4 = 1 + 4x + 6x^2 + 4x^3 + x^4.
+;;; The Binomial Coefficient can be computed using the Pascal Triangle formula:
+;;; B(n, r) = 1 if r = 0 or r = n
+;;; B(n, r) = B(n - 1, r - 1) + B(n - 1, r) otherwise
+;;; Implement a doubly recursive function (binomial N R) that computes the binomial coefficient B(N, R).
+
+;; type (binomial 4 2)
+(defun binomial (N R)
+  (if (or (zerop R) (= R N)) 1
+  (+ (binomial (- N 1) (- R 1)) (binomial (- N 1) R))
+))
+(trace binomial)
