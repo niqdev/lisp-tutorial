@@ -43,3 +43,11 @@
   (+ (binomial (- N 1) (- R 1)) (binomial (- N 1) R))
 ))
 (trace binomial)
+
+;;; ---------- exercise 1.4 ----------
+;;; Implement a linearly recursive function (sum L) which computes the sum of all numbers in a list L.
+;;; Compare your solution with the standard pattern of structural recursion.
+
+;; type: (sum '(2 8 4 6))
+(defun sum (L) (if (null L) 0 (+ (first L) (sum (rest L)))))
+(trace sum)

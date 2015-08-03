@@ -1,4 +1,7 @@
 # lisp-tutorial
+LISP stands for "LISt Processing"
+
+> work in progress
 
 Resources:
 * http://www.lispmachine.net/
