@@ -57,5 +57,17 @@
 ; Implement your own version of last using linear recursion. You may assume that (last nil) returns nil.
 ; Compare your implementation with the standard pattern of structural recursion.
 
+; type (last-item '(a b c d)) or (last-item '(1 2 3))
 (defun last-item (L) (if (null L) nil (last (rest L))))
 (trace last-item)
+
+; ---------- exercise 1.6 ----------
+; LISP defines a function (butlast L) that returns a list containing the same elements in L except for the last one.
+; Implement your own version of butlast using linear recursion. You may assume that (butlast nil) returns nil.
+
+; type: (but-last '(1 2 3 4 5))
+(defun but-last (L) (cond
+  ((null L) nil)
+  ((null (cdr L)) nil)
+  ((cons (first L) (but-last (rest L))))))
+(trace but-last)
