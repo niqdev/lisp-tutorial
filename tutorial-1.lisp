@@ -1,3 +1,4 @@
+; LISP Tutorial 1: Basic LISP Programming
 ; (load "tutorial-1.lisp")
 
 ; ---------- exercise 1.1 ----------
