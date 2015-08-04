@@ -71,3 +71,20 @@
   ((null (cdr L)) nil)
   ((cons (first L) (but-last (rest L))))))
 (trace but-last)
+
+; ---------- exercise 1.7 ----------
+; Give a linearly recursive implementation of union and difference.
+
+; type: (list-union '(0 1 2 3 4 9) '(2 3 4 5 6 7 8))
+(defun list-union (L1 L2) (cond
+  ((null L1) L2)
+  ((not (member (first L1) L2)) (cons (first L1) (list-union (rest L1) L2)))
+  (t (list-union (rest L1) L2)) ))
+(trace list-union)
+
+; (list-difference '(0 1 2 3 4 9) '(2 3 4 5 6 7 8))
+(defun list-difference (L1 L2) (cond
+  ((null L1) nil)
+  ((member (first L1) L2) (cons (first L1) (list-difference (rest L1) L2)))
+  (t (list-difference (rest L1) L2)) ))
+(trace list-difference)
