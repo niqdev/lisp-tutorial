@@ -71,3 +71,10 @@
 
 ;type: (list-nth 5 '(a b c d e f g h i j))
 (defun list-nth (N L) (first (repeat #'rest N L)))
+
+; ---------- example 4 ----------
+; using lambda (triple)
+(repeat #'(lambda (N) (* 3 N)) 4 1)
+
+; using lambda (prepend-word)
+(repeat #'(lambda (L) (cons 'lisp L)) 5 nil)
