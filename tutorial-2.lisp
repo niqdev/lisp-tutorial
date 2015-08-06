@@ -17,6 +17,8 @@
 (trace fast-factorial)
 (trace fast-factorial-aux)
 
+(defun factorial (N) (if (= 1 N) 1 (* N (factorial (- N 1)))))
+
 ;; Compilers for functional programming languages usually implement
 ;; tail-recursive call optimizations which automatically translate
 ;; a certain kind of linear recursion into efficient iterations.
@@ -26,6 +28,11 @@
 ; ---------- exercise 2.1 ----------
 ; Recall that the N'th triangular number is defined to be 1 + 2 + 3 + ... + N.
 ; Give a tail-recursive implementation of the function (fast-triangular N) which returns the N'th triangular number.
+(defun fast-triangular (N) (fast-triangular-aux N 1))
+(defun fast-triangular-aux (N A)
+  (if (= N 1) A (fast-triangular-aux (- N 1) (+ N A))))
+(trace fast-triangular)
+(trace fast-triangular-aux)
 
 ; ---------- exercise 2.2 ----------
 ; Give a tail-recursive implementation of the function (fast-power B E)
