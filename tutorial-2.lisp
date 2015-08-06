@@ -1,7 +1,7 @@
 ; LISP Tutorial 2: Advanced Functional Programming in LISP
 ; (load "tutorial-2.lisp")
 
-; example 1
+; ---------- example 1 ----------
 ; type: (list-reverse '(1 2 3 4 5))
 (defun list-reverse (L) (list-reverse-aux L nil))
 (defun list-reverse-aux (L A)
@@ -9,7 +9,7 @@
 (trace list-reverse)
 (trace list-reverse-aux)
 
-; example 2
+; ---------- example 2 ----------
 ; type: (fast-factorial 137)
 (defun fast-factorial (N) (fast-factorial-aux N 1))
 (defun fast-factorial-aux (N A)
@@ -54,3 +54,20 @@
   (if (null L) A (fast-list-length-aux (rest L) (+ A 1))))
 (trace fast-list-length)
 (trace fast-list-length-aux)
+
+; ---------- example 3 ----------
+(defun repeat (F N X)
+  "Repeat applying function F on object X for N times."
+  (if (zerop N) X (repeat F (1- N) (funcall F X))))
+(trace repeat)
+
+; type: (repeat #'triple 4 1)
+; type: (repeat (function triple) 4 1)
+(defun triple (N) (* 3 N))
+
+; type: (repeat #'prepend-word 5 nil)
+; type: (repeat (function prepend-word) 5 nil)
+(defun prepend-word (L) (cons 'lisp L))
+
+;type: (list-nth 5 '(a b c d e f g h i j))
+(defun list-nth (N L) (first (repeat #'rest N L)))
