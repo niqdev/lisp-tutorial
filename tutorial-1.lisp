@@ -59,7 +59,10 @@
 ; Compare your implementation with the standard pattern of structural recursion.
 
 ; type (last-item '(a b c d)) or (last-item '(1 2 3))
-(defun last-item (L) (if (null L) nil (last (rest L))))
+(defun last-item (L) (cond
+  ((null L) nil)
+  ((null (rest L)) L)
+  (t (last-item (rest L))) ))
 (trace last-item)
 
 ; ---------- exercise 1.6 ----------
