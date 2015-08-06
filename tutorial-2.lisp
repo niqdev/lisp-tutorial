@@ -17,8 +17,6 @@
 (trace fast-factorial)
 (trace fast-factorial-aux)
 
-(defun factorial (N) (if (= 1 N) 1 (* N (factorial (- N 1)))))
-
 ;; Compilers for functional programming languages usually implement
 ;; tail-recursive call optimizations which automatically translate
 ;; a certain kind of linear recursion into efficient iterations.
@@ -37,6 +35,11 @@
 ; ---------- exercise 2.2 ----------
 ; Give a tail-recursive implementation of the function (fast-power B E)
 ; that raises B to the power E (assuming that both B and E are non-negative integers).
+(defun fast-power (B E) (fast-power-aux B E 1))
+(defun fast-power-aux (B E A)
+  (if (= E 0) A (fast-power-aux B (- E 1) (* B A))))
+(trace fast-power)
+(trace fast-power-aux)
 
 ; ---------- exercise 2.3 ----------
 ; Give a tail-recursive implementation of the function (fast-list-length L),
