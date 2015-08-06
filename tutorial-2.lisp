@@ -44,3 +44,13 @@
 ; ---------- exercise 2.3 ----------
 ; Give a tail-recursive implementation of the function (fast-list-length L),
 ; which returns the length of a given list L.
+
+; type (slow-list-length '(1 a 2 b c 3 d 4))
+(defun slow-list-length (L) (if (null L) 0 (1+ (slow-list-length (rest L)))))
+(trace slow-list-length)
+
+(defun fast-list-length (L) (fast-list-length-aux L 0))
+(defun fast-list-length-aux (L A)
+  (if (null L) A (fast-list-length-aux (rest L) (+ A 1))))
+(trace fast-list-length)
+(trace fast-list-length-aux)
