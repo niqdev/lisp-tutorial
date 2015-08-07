@@ -115,3 +115,26 @@
 
 ; (2.5.d) a list containing a list containing the symbol blah
 (apply-func-list (list #'list #'(lambda (L) (cons 'blah L))) nil)
+
+; ---------- example 5 ----------
+; Given a list L of numbers, return a list containing the elements of L multiplied by 3
+; type: (triple-list-elements '(1 2 3 4 5))
+(defun triple-list-elements (L)
+  (if (null L) nil (cons (triple (first L)) (triple-list-elements (rest L))) ))
+(trace triple-list-elements)
+
+; Given a list L of lists, return a list containing the reversal of L's members
+; type: (reverse-list-elements '((1 2 3) (a b c) (4 5 6) (d e f)))
+(defun reverse-list-elements (L)
+  (if (null L) nil (cons (reverse (first L)) (reverse-list-elements (rest L))) ))
+(trace reverse-list-elements)
+
+; Apply function F to every element of list L, and return a list containing the results
+; type: (mapfirst #'triple '(1 2 3 4 5))
+; type: (mapfirst #'reverse '((1 2 3) (a b c) (4 5 6) (d e f)))
+(defun mapfirst (F L)
+  (if (null L) nil (cons (funcall F (first L)) (mapfirst F (rest L))) ))
+(trace mapfirst)
+
+; --> built-in MAPCAR
+; (mapcar #'butlast '((1 2 3) (a b c) (4 5 6) (d e f)))
