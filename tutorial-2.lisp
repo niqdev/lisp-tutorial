@@ -102,9 +102,16 @@
 ; Use apply-func-list to compute the following:
 
 ; (2.5.a) 10 times the fourth element of the list (10 20 30 40 50)
+(apply-func-list (list
+  #'(lambda (E) (* 10 E))
+  #'(lambda (L) (first (repeat #'rest 3 L)))
+  ) '(10 20 30 40 50))
 
 ; (2.5.b) the third element of the second element in the list ((1 2) (3 4 5) (6))
+(apply-func-list (list #'third #'second) '((1 2) (3 4 5) (6)))
 
 ; (2.5.c) the difference between 10 and the length of (a b c d e f)
+(apply-func-list (list #'(lambda (N) (- 10 N)) #'fast-list-length) '(a b c d e f))
 
 ; (2.5.d) a list containing a list containing the symbol blah
+(apply-func-list (list #'list #'(lambda (L) (cons 'blah L))) nil)
