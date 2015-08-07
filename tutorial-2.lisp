@@ -138,3 +138,39 @@
 
 ; --> built-in MAPCAR
 ; (mapcar #'butlast '((1 2 3) (a b c) (4 5 6) (d e f)))
+
+; ---------- example 6 ----------
+; Given a list L of numbers, return the leftmost even member
+; type: (find-even '(3 5 7 8 5 4))
+(defun find-even (L) (cond
+  ((null L) nil)
+  ((evenp (first L)) (first L))
+  ((find-even (rest L))) ))
+
+; ---------- exercise 2.6 ----------
+; Implement a function that, when given a list L of lists, return a non-empty member of L
+; type: (find-member '(nil nil (1 2 3) (4 5)))
+(defun find-member (L) (cond
+  ((null L) nil)
+  ((not (null (first L))) (first L))
+  ((find-member (rest L))) ))
+
+; ---------- example 7 ----------
+; Find the leftmost element of list L that satisfies predicate P
+; type: (list-find-if #'evenp '(3 5 7 8 5 4))
+; type: (list-find-if #'(lambda (L) (not (null L))) '(nil nil (1 2 3) (4 5)))
+(defun list-find-if (P L) (cond
+  ((null L) nil)
+  ((funcall P (first L)) (first L))
+  ((list-find-if P (rest L))) ))
+
+; --> built-in FIND-IF
+; (find-if #'evenp '(3 5 7 8 5 4))
+; (find-if #'(lambda (L) (not (null L))) '(nil nil (1 2 3) (4 5)))
+
+; ---------- exercise 2.7 ----------
+; (2.7.a) Use find-if to define a function that searches among a list of lists for a member that has length at least 3
+
+; (2.7.b) Use find-if to define a function that searches among a list of lists for a member that contains an even number of elements
+
+; (2.7.c) Use find-if to define a function that searches among a list of numbers for a member that is divisible by three
