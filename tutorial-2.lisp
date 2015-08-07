@@ -78,3 +78,33 @@
 
 ; using lambda (prepend-word)
 (repeat #'(lambda (L) (cons 'lisp L)) 5 nil)
+
+; ---------- exercise 2.4 ----------
+; Define a function (apply-func-list L X) so that, given a list L of functions and an object X,
+; apply-func-list applies the functions in L to X in reversed order.
+; For example, the following expression are equivalent
+; (apply-func-list (list #'double #'list-length #'rest) '(1 2 3))
+; (double (list-length (rest '(1 2 3))))
+
+; (triple (list-length (rest '(1 2 3))))
+; (apply-func-list (list #'triple #'list-length #'rest) '(1 2 3))
+(defun apply-func-list (L X)
+  (if (null L) X (funcall (first L) (apply-func-list (rest L) X)) ))
+(trace apply-func-list)
+
+; note that (car (cons x y)) returns x and (cdr (cons x y)) returns y
+; type: (reversed '(1 2 3 4 5))
+(defun reversed (L)
+  (if (null (cdr L)) (car L) (cons (reversed (rest L)) (first L)) ))
+(trace reversed)
+
+; ---------- exercise 2.5 ----------
+; Use apply-func-list to compute the following:
+
+; (2.5.a) 10 times the fourth element of the list (10 20 30 40 50)
+
+; (2.5.b) the third element of the second element in the list ((1 2) (3 4 5) (6))
+
+; (2.5.c) the difference between 10 and the length of (a b c d e f)
+
+; (2.5.d) a list containing a list containing the symbol blah
