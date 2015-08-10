@@ -169,8 +169,14 @@
 ; (find-if #'(lambda (L) (not (null L))) '(nil nil (1 2 3) (4 5)))
 
 ; ---------- exercise 2.7 ----------
-; (2.7.a) Use find-if to define a function that searches among a list of lists for a member that has length at least 3
+; (2.7.a) Use find-if to define a function that searches among
+; a list of lists for a member that has length at least 3
+(find-if #'(lambda (L) (>= (fast-list-length L) 3)) '((c) (a b) (1 2 3 4) (5 6 7)))
 
-; (2.7.b) Use find-if to define a function that searches among a list of lists for a member that contains an even number of elements
+; (2.7.b) Use find-if to define a function that searches among
+; a list of lists for a member that contains an even number of elements
+(find-if #'(lambda (L) (evenp (fast-list-length L))) '((1 2 3) (e) (a b c) (4 5)))
 
-; (2.7.c) Use find-if to define a function that searches among a list of numbers for a member that is divisible by three
+; (2.7.c) Use find-if to define a function that searches among
+; a list of numbers for a member that is divisible by three
+(find-if #'(lambda (X) (zerop (rem X 3))) '(2 5 7 4 6 8 3))
