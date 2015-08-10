@@ -137,7 +137,7 @@
 (trace mapfirst)
 
 ; --> built-in MAPCAR
-; (mapcar #'butlast '((1 2 3) (a b c) (4 5 6) (d e f)))
+(mapcar #'butlast '((1 2 3) (a b c) (4 5 6) (d e f)))
 
 ; ---------- example 6 ----------
 ; Given a list L of numbers, return the leftmost even member
@@ -166,7 +166,7 @@
 
 ; --> built-in FIND-IF
 ; (find-if #'evenp '(3 5 7 8 5 4))
-; (find-if #'(lambda (L) (not (null L))) '(nil nil (1 2 3) (4 5)))
+(find-if #'(lambda (L) (not (null L))) '(nil nil (1 2 3) (4 5)))
 
 ; ---------- exercise 2.7 ----------
 ; (2.7.a) Use find-if to define a function that searches among
@@ -180,3 +180,44 @@
 ; (2.7.c) Use find-if to define a function that searches among
 ; a list of numbers for a member that is divisible by three
 (find-if #'(lambda (X) (zerop (rem X 3))) '(2 5 7 4 6 8 3))
+
+; ---------- example 8 ----------
+
+; Remove all members of L that has length less than three
+; type: (remove-short-list '((d e) (1 2 3 4) (9) (a b c) nil (4 5 6 7 8)))
+(defun remove-short-list (L) (cond
+  ((null L) nil)
+  ((< (fast-list-length (first L)) 3) (remove-short-list (rest L)))
+  ((cons (first L) (remove-short-list (rest L)))) ))
+
+; Remove all members of L that is an even number
+; type: (remove-even '(2 3 8 10 7 5 6 3 12))
+(defun remove-even (L) (cond
+  ((null L) nil)
+  ((evenp (first L)) (remove-even (rest L)))
+  ((cons (first L) (remove-even (rest L)))) ))
+
+; --> built-in REMOVE-IF
+(remove-if #'(lambda (L) (< (fast-list-length L) 3))
+  '((d e) (1 2 3 4) (9) (a b c) nil (4 5 6 7 8)))
+
+(remove-if #'(lambda (L) (evenp L)) '(2 3 8 10 7 5 6 3 12))
+
+; ---------- exercise 2.8 ----------
+; Observe the recurring pattern in remove-short-lists and remove-even,
+; and implement your own version of remove-if
+; type: (list-remove-if #'(lambda (L) (< (fast-list-length L) 3)) '((d e) (1 2 3 4) (9) (a b c)))
+; type: (list-remove-if #'(lambda (L) (evenp L)) '(2 3 8 10 7 5 6 3 12))
+(defun list-remove-if (P L) (cond
+  ((null L) nil)
+  ((funcall P (first L)) (list-remove-if P (rest L)))
+  ((cons (first L) (list-remove-if P (rest L)))) ))
+
+; ---------- example 9   ----------
+; Compute the intersection of lists L1 and L2.
+(defun list-intersection (L1 L2)
+  (remove-if #'(lambda (X) (not (member X L2))) L1))
+
+; Use remove-if and lambda abstractions to implement list-difference
+(defun list-difference (L1 L2)
+  (remove-if #'(lambda (X) (member X L2)) L1))
